@@ -1,31 +1,40 @@
-import React from 'react';
-import './Button.css';
+import React, { MouseEvent } from "react";
 
 export interface ButtonProps {
-  label: string;
-  primary?: boolean;
-  size?: 'small' | 'medium' | 'large';
-  onClick?: () => void;
-  disabled?: boolean;
+    wrapperClass?: string;
+    inputClass?: string;
+    type?: "button" | "submit" | "reset";
+    value?: string;
+    onClick?: (e: MouseEvent<HTMLInputElement>) => void;
+    proSetting?: boolean;
+    description?: string;
+    descClass?: string;
 }
 
-export const Button: React.FC<ButtonProps> = ({
-  label,
-  primary = false,
-  size = 'medium',
-  onClick,
-  disabled = false,
+const Button: React.FC<ButtonProps> = ({
+    wrapperClass,
+    inputClass,
+    type = "button",
+    value,
+    onClick,
+    proSetting,
+    description,
+    descClass
 }) => {
-  const mode = primary ? 'button-primary' : 'button-secondary';
-  
-  return (
-    <button
-      type="button"
-      className={['button', `button-${size}`, mode].join(' ')}
-      onClick={onClick}
-      disabled={disabled}
-    >
-      {label}
-    </button>
-  );
+    return (
+        <div className={wrapperClass}>
+            <input
+                className={inputClass}
+                type={type}
+                value={value}
+                onClick={(e) => onClick?.(e)}
+            />
+            {proSetting && <span className="admin-pro-tag">pro</span>}
+            {description && (
+                <p className={descClass} dangerouslySetInnerHTML={{ __html: description }} />
+            )}
+        </div>
+    );
 };
+
+export default Button;
