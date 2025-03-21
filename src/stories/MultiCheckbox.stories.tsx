@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Meta, StoryFn } from "@storybook/react";
-import MultiCheckBox from "../components/MultiCheckbox/MultiCheckbox";
+import MultiCheckBox from "../components/Input/MultiCheckbox/MultiCheckbox";
 
 export default {
     title: "Components/MultiCheckBox",

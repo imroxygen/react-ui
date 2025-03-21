@@ -1,7 +1,7 @@
 import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
-import { CalendarInputProps } from "../components/CalendarInput";
-import CalendarInput from "../components/CalendarInput/CalendarInput";
+import { CalendarInputProps } from "../components/Input/CalendarInput";
+import CalendarInput from "../components/Input/CalendarInput/CalendarInput";
 
 export default {
     title: "Components/CalendarInput",

@@ -1,0 +1,11 @@
+.my-custom-wrapper {
+  padding: 1rem;
+  background: lightgray;
+}
+
+.my-custom-input {
+  --input-color: red;         /* Overrides default black */
+  --input-bg: rgb(58, 58, 54);         /* Overrides default white */
+  border: 2px dashed blue;    /* Overrides default border */
+  padding: 1rem;              /* Overrides default padding */
+}

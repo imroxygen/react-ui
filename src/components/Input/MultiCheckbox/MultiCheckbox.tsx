@@ -33,7 +33,7 @@ export interface MultiCheckBoxProps {
     descClass?: string;
 }
 
-const MultiCheckBox: React.FC<MultiCheckBoxProps> = (props) => {
+export const MultiCheckBox: React.FC<MultiCheckBoxProps> = (props) => {
     return (
         <div className={props.wrapperClass}>
             {props.selectDeselect && (

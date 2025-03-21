@@ -1,7 +1,7 @@
 import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
-import { FileInputProps } from "../components/FileInput";
-import FileInput from "../components/FileInput/FileInput";
+import { FileInputProps } from "../components/Input/FileInput";
+import FileInput from "../components/Input/FileInput/FileInput";
 
 export default {
     title: "Components/FileInput",

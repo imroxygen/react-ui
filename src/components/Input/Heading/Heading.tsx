@@ -5,7 +5,7 @@ export interface HeadingProps {
     blocktext?: string;
 }
 
-const Heading: React.FC<HeadingProps> = ({ wrapperClass, blocktext }) => {
+export const Heading: React.FC<HeadingProps> = ({ wrapperClass, blocktext }) => {
     return (
         <div className={wrapperClass}>
             {blocktext && <h5 dangerouslySetInnerHTML={{ __html: blocktext }}></h5>}

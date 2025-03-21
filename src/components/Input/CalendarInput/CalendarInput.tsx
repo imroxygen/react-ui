@@ -12,7 +12,7 @@ export interface CalendarInputProps {
     proSetting?: boolean;
 }
 
-const CalendarInput: React.FC<CalendarInputProps> = (props) => {
+export const CalendarInput: React.FC<CalendarInputProps> = (props) => {
     let formattedDate: any;
     const dates = props.value.split(",");
 

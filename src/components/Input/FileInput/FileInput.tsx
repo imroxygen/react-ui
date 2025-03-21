@@ -24,7 +24,7 @@ export interface FileInputProps {
     descClass?: string;
 }
 
-const FileInput: React.FC<FileInputProps> = (props) => {
+export const FileInput: React.FC<FileInputProps> = (props) => {
     return (
         <div className={props.wrapperClass}>
             <div className="file-uploader">
