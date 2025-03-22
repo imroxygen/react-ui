@@ -12,3 +12,4 @@ export * from "./SelectInput";
 export * from "./TextArea";
 export * from "./ButtonCustomiser";
 export * from "./FormCustomizer";
+export * from "./SubTabSection";

@@ -1,0 +1,72 @@
+$theme-color:       #522c81;
+$accent-color:      #e35047;
+$light-accent-color:#e26f76;
+
+$color-white:   	#fff;
+$color-black: 		#181819;
+$color-light-black: #2d2d2d;
+$color-active: 		#65438f;
+
+$menu-color: 		#f9f8fb;
+
+$background-color: 	#f9f9f9;
+
+$border-light-small   : 0.063rem solid #e0e4e9;
+$border-light-medium  : 0.120rem solid #e0e4e9;
+
+$border-black-small   : 0.063rem solid #111418;
+$border-black-medius  : 0.115rem solid #111418;
+
+$border-theme-small   : 0.063rem solid #65438f;
+$border-theme-medius  : 0.115rem solid #65438f;
+$border-theme-large   : 0.125rem solid #65438f;
+
+$border-radius-small    : 0.25rem;
+$border-radius-medium   : 0.438rem;
+$border-radius-large    : 0.5rem;
+$border-radius-button   : 8rem;
+
+
+.tab-section {
+    position: absolute;
+    top: -5.5rem;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+
+    .tab-section-menu {
+        transition: color 0.3s linear;
+        padding: 0.5rem;
+        position: relative;
+        color: $color-black;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        gap: 0.25rem;
+
+        span {
+            font-size: 1rem;
+        }
+        &:hover {
+            color: $theme-color;
+        }
+        &.active {
+            color: $theme-color;
+
+            &::after {
+                position: absolute;
+                content: "";
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 0.12rem;
+                background: $theme-color;
+            }
+        }
+
+    }
+
+}
