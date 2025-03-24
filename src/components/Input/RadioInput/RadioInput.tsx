@@ -10,6 +10,7 @@ export interface RadioOption {
 }
 
 export interface RadioInputProps {
+    name?: string;
     wrapperClass?: string;
     inputWrapperClass?: string;
     activeClass?: string;
@@ -26,6 +27,7 @@ export interface RadioInputProps {
     proSetting?: boolean;
     description?: string;
     descClass?: string;
+    keyName?: string;
 }
 
 export const RadioInput: React.FC<RadioInputProps> = (props) => {

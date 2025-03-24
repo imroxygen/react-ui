@@ -5,6 +5,7 @@ import ButtonCustomizer from '../ButtonCustomiser/ButtonCustomiser';
 
 
 interface FormCustomizerProps {
+    value?: string;
     buttonText?: string;
     proSetting?: any;
     onChange: (key: string, value: any, isRestoreDefaults?: boolean) => void;

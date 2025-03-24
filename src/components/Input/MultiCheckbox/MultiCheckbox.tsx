@@ -31,6 +31,7 @@ export interface MultiCheckBoxProps {
     hintOuterClass?: string;
     description?: string;
     descClass?: string;
+    hintInnerClass?: string;
 }
 
 export const MultiCheckBox: React.FC<MultiCheckBoxProps> = (props) => {

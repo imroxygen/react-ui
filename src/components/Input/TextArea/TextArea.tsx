@@ -5,7 +5,7 @@ export interface TextAreaProps {
     inputClass?: string;
     id?: string;
     name?: string;
-    value?: string;
+    value?: string | number;
     maxLength?: number;
     placeholder?: string;
     rowNumber?: number;

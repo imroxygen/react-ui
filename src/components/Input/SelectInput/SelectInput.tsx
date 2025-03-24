@@ -4,6 +4,7 @@ import Select, { MultiValue, SingleValue, ActionMeta } from "react-select";
 export interface SelectOption {
     value: string;
     label: string;
+    index?: number;
 }
 
 export interface SelectInputProps {
@@ -16,16 +17,14 @@ export interface SelectInputProps {
     value?: string;
     inputClass?: string;
     type?: "single-select" | "multi-select";
-    onChange?: (
-        newValue: SingleValue<SelectOption> | MultiValue<SelectOption>,
-        actionMeta: ActionMeta<SelectOption>
-    ) => void;
+    onChange?: (newValue: SingleValue<SelectOption> | MultiValue<SelectOption>, actionMeta: ActionMeta<SelectOption>) => void;
+    onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
     proSetting?: boolean;
     description?: string;
     descClass?: string;
 }
 
-export const SelectInput: React.FC<SelectInputProps> = ({
+const SelectInput: React.FC<SelectInputProps> = ({
     wrapperClass,
     selectDeselect,
     selectDeselectClass,
@@ -36,14 +35,16 @@ export const SelectInput: React.FC<SelectInputProps> = ({
     inputClass,
     type = "single-select",
     onChange,
+    onClick,
     proSetting,
     description,
     descClass,
 }) => {
     // Convert options to react-select format
-    const optionsData = options.map((option) => ({
+    const optionsData: SelectOption[] = options.map((option, index) => ({
         value: option.value,
         label: option.label,
+        index,
     }));
 
     // Find default selected value
