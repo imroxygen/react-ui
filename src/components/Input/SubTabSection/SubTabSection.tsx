@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import './SubTabSection.scss';
 
 interface MenuItem {
-    id: string;
+    id: number;
     name: string;
     icon: string;
+    link: string;
 }
 
 interface SubTabSectionProps {

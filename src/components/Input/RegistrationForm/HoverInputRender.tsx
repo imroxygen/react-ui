@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React,{ useState, useEffect, useRef } from "react";
 
-// Define the interface before the component
 interface HoverInputRenderProps {
     label: string;
-    placeholder: string;
+    placeholder?: string;
     onLabelChange: (newLabel: string) => void;
-    renderStaticContent: (props: { label: string; placeholder: string }) => JSX.Element;
-    renderEditableContent: (props: { label: string; onLabelChange: (newLabel: string) => void; placeholder: string }) => JSX.Element;
+    renderStaticContent: (props: { label: string; placeholder?: string }) => JSX.Element;
+    renderEditableContent: (props: { label: string; onLabelChange: (newLabel: string) => void; placeholder?: string }) => JSX.Element;
 }
 
 const HoverInputRender: React.FC<HoverInputRenderProps> = ({
@@ -16,9 +15,9 @@ const HoverInputRender: React.FC<HoverInputRenderProps> = ({
     renderStaticContent,
     renderEditableContent,
 }) => {
-    const [showTextBox, setShowTextBox] = useState<boolean>(false);
-    const [isClicked, setIsClicked] = useState<boolean>(false);
-    let hoverTimeout: NodeJS.Timeout | null = null;
+    const [showTextBox, setShowTextBox] = useState(false);
+    const [isClicked, setIsClicked] = useState(false);
+    const hoverTimeout = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
         const closePopup = (event: MouseEvent) => {
@@ -28,7 +27,6 @@ const HoverInputRender: React.FC<HoverInputRenderProps> = ({
             setIsClicked(false);
             setShowTextBox(false);
         };
-
         document.body.addEventListener("click", closePopup);
         return () => {
             document.body.removeEventListener("click", closePopup);
@@ -36,11 +34,11 @@ const HoverInputRender: React.FC<HoverInputRenderProps> = ({
     }, []);
 
     const handleMouseEnter = () => {
-        hoverTimeout = setTimeout(() => setShowTextBox(true), 300);
+        hoverTimeout.current = setTimeout(() => setShowTextBox(true), 300);
     };
 
     const handleMouseLeave = () => {
-        if (hoverTimeout) clearTimeout(hoverTimeout);
+        if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
         if (!isClicked) setShowTextBox(false);
     };
 
