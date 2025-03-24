@@ -1,41 +1,47 @@
-import { __ } from "@wordpress/i18n";
 import React from "react";
+import HoverInputRender from "../HoverInputRender";
 
-interface SelectOption {
-    value : string;
-    label : string;
-    icon?: string;
+interface SimpleInputProps {
+    formField: { label: string; placeholder?: string };
+    onChange: (field: string, value: string) => void;
 }
-interface ElementsProps {
-    selectOptions: SelectOption[];
-    onClick :( value : string) => void;
-}
-const Elements: React.FC<ElementsProps> = ( {
-    selectOptions,
-    onClick
-} ) => {
 
+const SimpleInput: React.FC<SimpleInputProps> = ({ formField, onChange }) => {
     return (
-        <>
-            <aside className='elements-section'>
-                <div className='section-meta'>
-                    <h2>{__("Form fields", "catalogx")}</h2>
+        <HoverInputRender
+            label={formField.label}
+            placeholder={formField.placeholder}
+            onLabelChange={(newLabel) => onChange("label", newLabel)}
+            renderStaticContent={({ label, placeholder }) => (
+                <div className="edit-form-wrapper">
+                    <p>{label}</p>
+                    <div className="settings-form-group-radio">
+                        <input
+                            className="input-text-section simpleInput-text-input"
+                            type="text"
+                            placeholder={placeholder}
+                        />
+                    </div>
                 </div>
-                <main className='section-container'>
-                    {
-                        selectOptions.map((option) => (
-                            <article
-                                className='elements-items'
-                                onClick={(event) => onClick(option.value)}
-                            >
-                                <i className={` ${option.icon}`}></i>
-                                <p className='list-title'>{option.label}</p>
-                            </article>
-                        ))
-                    }
-                </main>
-            </aside>
-        </>
-    )
-  }
-  export default Elements
+            )}
+            renderEditableContent={({ label, onLabelChange, placeholder }) => (
+                <>
+                    <input
+                        className="input-label simpleInput-label"
+                        type="text"
+                        value={label}
+                        onChange={(event) => onLabelChange(event.target.value)}
+                    />
+                    <input
+                        className="input-text-section simpleInput-text-input"
+                        type="text"
+                        readOnly
+                        placeholder={placeholder}
+                    />
+                </>
+            )}
+        />
+    );
+};
+
+export default SimpleInput;

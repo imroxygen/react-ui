@@ -3,7 +3,7 @@ import React from "react";
 
 interface FormField {
     label: string;
-    placeholder: string;
+    placeholder?: string;
 }
 
 interface AttachmentProps {

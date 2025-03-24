@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Draggable from "react-draggable";
+
 interface Option {
-    value: string;
     label: string;
-    isdefault: boolean;
+    value: string;
+    isdefault?: boolean;
 }
 
 interface OptionMetaBoxProps {
     option: Option;
-    onChange: (field: keyof Option, value: any) => void;
+    onChange: (key: keyof Option, value: string | boolean) => void;
     setDefaultValue: () => void;
     hasOpen: boolean;
 }
@@ -21,8 +22,8 @@ const OptionMetaBox: React.FC<OptionMetaBoxProps> = ({ option, onChange, setDefa
     }, [hasOpen]);
 
     return (
-        <div 
-            onClick={(event) => {
+        <div
+            onClick={(event: React.MouseEvent<HTMLDivElement>) => {
                 setHasOpened(true);
                 event.stopPropagation();
             }}
@@ -34,47 +35,51 @@ const OptionMetaBox: React.FC<OptionMetaBoxProps> = ({ option, onChange, setDefa
                         {/* Close button */}
                         <button
                             className="meta-setting-modal-button"
-                            onClick={(event) => {
+                            onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
                                 event.stopPropagation();
                                 setHasOpened(false);
                             }}
                         >
                             <i className="admin-font adminLib-cross"></i>
                         </button>
-                        
-                        {/* Main Content */}
+
+                        {/* Modal Content */}
                         <main className="meta-setting-modal-content">
                             <h3>Input Field Settings</h3>
 
                             <div className="setting-modal-content-section">
-                                {/* Input Field for Value */}
+                                {/* Input Value */}
                                 <article className="modal-content-section-field">
                                     <p>Value</p>
                                     <input
                                         type="text"
                                         value={option.value}
-                                        onChange={(e) => onChange("value", e.target.value)}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                            onChange("value", e.target.value)
+                                        }
                                     />
                                 </article>
 
-                                {/* Input Field for Label */}
+                                {/* Input Label */}
                                 <article className="modal-content-section-field">
                                     <p>Label</p>
                                     <input
                                         type="text"
                                         value={option.label}
-                                        onChange={(e) => onChange("label", e.target.value)}
+                                        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                                            onChange("label", e.target.value)
+                                        }
                                     />
                                 </article>
                             </div>
 
-                            {/* Checkbox for Setting Default */}
+                            {/* Set Default Option */}
                             <div className="setting-modal-content-section">
                                 <article className="modal-content-section-field">
                                     <p>Set default</p>
                                     <input
                                         type="checkbox"
-                                        checked={option.isdefault}
+                                        checked={option.isdefault || false}
                                         onChange={() => setDefaultValue()}
                                     />
                                 </article>
@@ -85,6 +90,6 @@ const OptionMetaBox: React.FC<OptionMetaBoxProps> = ({ option, onChange, setDefa
             )}
         </div>
     );
-}
+};
 
 export default OptionMetaBox;
