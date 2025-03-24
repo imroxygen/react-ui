@@ -1,1 +1,1 @@
-export * from "./FormCustomizer";
+export * from "./FreeProFormCustomizer";

@@ -10,6 +10,7 @@ type SyncStatus = {
 };
 
 export interface  SyncNowProps{
+  buttonKey: string;
   interval: number;
   proSetting: boolean;
   proSettingChanged: () => boolean;

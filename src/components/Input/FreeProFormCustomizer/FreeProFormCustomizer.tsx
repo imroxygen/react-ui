@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './FormCustomizer.scss';
+import './FreeProFormCustomizer.scss';
 import '../RegistrationForm/RegistrationForm.scss';
 import SubTabSection from '../SubTabSection/SubTabSection';
 import ProForm from '../RegistrationForm/RegistrationForm';
@@ -29,7 +29,7 @@ interface FormCustomizerProps {
 }
 
 // FormCustomizer Component
-const FormCustomizer: React.FC<FormCustomizerProps> = ({ setting, proSettingChange, moduleEnabledChange, onChange }) => {
+const FreeProFormCustomizer: React.FC<FormCustomizerProps> = ({ setting, proSettingChange, moduleEnabledChange, onChange }) => {
     const settingChange = useRef<boolean>(false);
     
     // Initialize state
@@ -154,4 +154,4 @@ const FormCustomizer: React.FC<FormCustomizerProps> = ({ setting, proSettingChan
     );
 };
 
-export default FormCustomizer;
+export default FreeProFormCustomizer;

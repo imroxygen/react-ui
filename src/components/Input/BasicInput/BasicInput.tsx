@@ -5,7 +5,7 @@ export interface BasicInputProps {
     inputLabel?: string;
     inputClass?: string;
     id?: string;
-    type?: "text" | "number" | "password" | "email" | "file" | "range";
+    type?: "text" | "button" | "number"| "color" | "password" | "email" | "file" | "range" |"url";
     name?: string;
     value?: string | number;
     placeholder?: string;

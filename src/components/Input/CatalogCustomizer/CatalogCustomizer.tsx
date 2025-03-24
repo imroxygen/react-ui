@@ -13,6 +13,7 @@ interface MenuItem {
   name: string;
   id: string;
   icon: string;
+  link?:string;
 }
 
 interface DragableItem {
