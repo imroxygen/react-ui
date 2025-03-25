@@ -28,7 +28,7 @@ $border-radius-button   : 8rem;
 
 
 div.subscriber-img {
-  background-image: url("../../assets/images/subscriber-list.jpg") !important; // force to set image for ungrade with pro for desktop-screen
+  background-image: url("../../../assets/images/subscriber-list.jpg") !important; // force to set image for ungrade with pro for desktop-screen
   background-repeat: no-repeat;
   background-position: top left;
   background-size: contain;
@@ -37,7 +37,7 @@ div.subscriber-img {
 
 @media only screen and (max-width: 69.3rem) {
   div.subscriber-img {
-    background-image: url("../../assets/images/subcriber-list-tab.png") !important; // force to set image for ungrade with pro for laptop-screen
+    background-image: url("../../../assets/images/subcriber-list-tab.png") !important; // force to set image for ungrade with pro for laptop-screen
     background-repeat: no-repeat;
     background-position: top;
     background-size: contain;
@@ -46,7 +46,7 @@ div.subscriber-img {
 
 @media only screen and (max-width: 40.95rem) {
   div.subscriber-img {
-    background-image: url("../../assets/images/subcriber-list-phone.png") !important; // force to set image for ungrade with pro for mobile-screen
+    background-image: url("../../../assets/images/subcriber-list-phone.png") !important; // force to set image for ungrade with pro for mobile-screen
     background-repeat: no-repeat;
     background-position: top;
     background-size: contain;

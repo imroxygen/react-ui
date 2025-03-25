@@ -1,4 +1,5 @@
 import { defineConfig } from "tsup";
+import { sassPlugin } from "esbuild-sass-plugin";
 
 export default defineConfig({
   entry: ["src/index.ts"],
@@ -8,4 +9,5 @@ export default defineConfig({
   splitting: false,
   clean: true,
   minify: true,
+  esbuildPlugins: [sassPlugin()],
 });

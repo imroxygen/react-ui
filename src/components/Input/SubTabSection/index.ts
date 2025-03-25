@@ -1,1 +1,1 @@
-export * from "./SubTabSection.tsx";
+export * from "./SubTabSection";
