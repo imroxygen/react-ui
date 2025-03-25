@@ -1,5 +1,5 @@
-import './AdminFooter.scss';
 import React from 'react';
+import './AdminFooter.module.scss';
 
 export interface SupportLink {
     title: string;
