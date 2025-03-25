@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Dialog from "@mui/material/Dialog";
 import Popoup from '../../Advertisement/PopupContent/Propopup';
-import './banner.scss';
+import './banner.module.scss';
 
-interface AppLocalizer {
+interface BannerProps {
     khali_dabba: boolean;
     pro_url?: string; // Add other properties as needed
 }
 
-const appLocalizer : AppLocalizer ={
-    khali_dabba : true
-}
-
-export default function Banner(): JSX.Element {
+const Banner: React.FC<BannerProps> = ({
+    khali_dabba,
+    pro_url
+})=> {
     // Ensure localStorage is initialized correctly
     if (localStorage.getItem('banner') !== 'false') {
         localStorage.setItem("banner", "true");
@@ -44,60 +43,56 @@ export default function Banner(): JSX.Element {
         let currentIndex: number = 0;
         let interval: NodeJS.Timeout;
 
+        // Function to show the current slide and hide others
         const showSlide = (index: number): void => {
             carouselItems.forEach(item => item.classList.remove('active'));
             carouselItems[index].classList.add('active');
         };
 
+        // Function to go to the next slide
         const nextSlide = (): void => {
             currentIndex = (currentIndex + 1) % totalItems;
             showSlide(currentIndex);
         };
 
+        // Function to go to the previous slide
         const prevSlide = (): void => {
             currentIndex = (currentIndex - 1 + totalItems) % totalItems;
             showSlide(currentIndex);
         };
 
+        // Start the auto-slide interval
         const startAutoSlide = (): void => {
             interval = setInterval(nextSlide, 7000); // Change slide every 7 seconds
         };
 
+        // Stop the auto-slide interval
         const stopAutoSlide = (): void => {
             clearInterval(interval);
         };
 
+        // Initialize the carousel
         showSlide(currentIndex);
         startAutoSlide();
 
-        // Event Listeners for Next and Previous Buttons
-        const nextBtn = document.getElementById('nextBtn');
-        const prevBtn = document.getElementById('prevBtn');
-
-        if (nextBtn && prevBtn) {
-            nextBtn.addEventListener('click', () => {
-                nextSlide();
-                stopAutoSlide();
-                startAutoSlide();
-            });
-
-            prevBtn.addEventListener('click', () => {
-                prevSlide();
-                stopAutoSlide();
-                startAutoSlide();
-            });
-        }
-
-        return () => {
+        
+        // Handle next button click
+        document.getElementById('nextBtn')?.addEventListener('click', () => {
+            nextSlide();
             stopAutoSlide();
-            if (nextBtn) nextBtn.removeEventListener('click', nextSlide);
-            if (prevBtn) prevBtn.removeEventListener('click', prevSlide);
-        };
+            startAutoSlide();
+        });
+
+        document.getElementById('prevBtn')?.addEventListener('click', () => {
+            prevSlide();
+            stopAutoSlide();
+            startAutoSlide();
+        });
     }, [banner]);
 
     return (
         <>
-            {!appLocalizer.khali_dabba ? (
+            {!khali_dabba ? (
                 banner ? (
                     <div className="custom-banner">
                         <Dialog
@@ -122,7 +117,7 @@ export default function Banner(): JSX.Element {
                                             <h3>This is a sample banner</h3>
                                             <p>Sample banner description</p>
                                             <a
-                                                href="#"
+                                                href={pro_url}
                                                 target='_blank'
                                                 className="admin-btn btn-red"
                                             >
@@ -135,7 +130,7 @@ export default function Banner(): JSX.Element {
                                             <h3>This is an example banner</h3>
                                             <p>Example banner description</p>
                                             <a
-                                                href="#"
+                                                href={pro_url}
                                                 target='_blank'
                                                 className="admin-btn btn-red"
                                             >
@@ -156,3 +151,5 @@ export default function Banner(): JSX.Element {
         </>
     );
 }
+
+export default Banner;

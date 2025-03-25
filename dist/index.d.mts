@@ -14,4 +14,6 @@ interface ButtonProps {
 }
 declare const Button: React.FC<ButtonProps>;
 
-export { AdminFooter, Button };
+declare const Banner: React.FC;
+
+export { AdminFooter, Banner, Button };
