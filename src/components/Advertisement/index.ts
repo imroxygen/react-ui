@@ -12,3 +12,4 @@ export * from "./Modules";
 export * from "./Support";
 export * from "./FormViewer";
 export * from "./TableComponent";
+export * from "./TourSteps";
