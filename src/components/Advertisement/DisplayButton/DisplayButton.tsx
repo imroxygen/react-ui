@@ -1,6 +1,6 @@
 import React,{ useState } from 'react';
 
-export interface ButtonProps {
+export interface ButtonProp {
     customStyle: {
         button_border_size?: number;
         button_border_color?: string;
@@ -20,7 +20,7 @@ export interface ButtonProps {
     onClick?: () => void;
 };
 
-const Button: React.FC<ButtonProps> = ({ customStyle, children, onClick }) => {
+const Button: React.FC<ButtonProp> = ({ customStyle, children, onClick }) => {
     const style = {
         border: `${customStyle.button_border_size ?? 1}px solid ${customStyle.button_border_color ?? '#000000'}`,
         backgroundColor: customStyle.button_background_color ?? '#ffffff',

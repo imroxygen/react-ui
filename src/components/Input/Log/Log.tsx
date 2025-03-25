@@ -7,7 +7,7 @@ export interface LogProps {
   fetchApiLink: string;
   downloadApiLink: string;
   downloadFileName: string;
-  appLocalizer:{
+  appLocalizer?:{
     nonce?:string,
     tab_name?:string,
   },
@@ -19,7 +19,7 @@ export const Log: React.FC<LogProps> = ({ fetchApiLink, downloadApiLink, downloa
 
   useEffect(() => {
     axios
-      .post(getApiLink(fetchApiLink), { logcount: 100 }, { headers: { "X-WP-Nonce": appLocalizer.nonce } })
+      .post(getApiLink(fetchApiLink), { logcount: 100 }, { headers: { "X-WP-Nonce": appLocalizer?.nonce } })
       .then((response) => {
         setLogData(response.data);
       });
@@ -30,7 +30,7 @@ export const Log: React.FC<LogProps> = ({ fetchApiLink, downloadApiLink, downloa
     axios({
       url: getApiLink(downloadApiLink),
       method: "POST",
-      headers: { "X-WP-Nonce": appLocalizer.nonce },
+      headers: { "X-WP-Nonce": appLocalizer?.nonce },
       data: { file: downloadFileName },
       responseType: "blob",
     })
@@ -50,7 +50,7 @@ export const Log: React.FC<LogProps> = ({ fetchApiLink, downloadApiLink, downloa
   const handleClearLog = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     axios
-      .post(getApiLink(fetchApiLink), { logcount: 100, clear: true }, { headers: { "X-WP-Nonce": appLocalizer.nonce } })
+      .post(getApiLink(fetchApiLink), { logcount: 100, clear: true }, { headers: { "X-WP-Nonce": appLocalizer?.nonce } })
       .then(() => {
         setLogData([]);
       });
@@ -90,7 +90,7 @@ export const Log: React.FC<LogProps> = ({ fetchApiLink, downloadApiLink, downloa
       </div>
       <div className="log-container-wrapper">
         <div className="wrapper-header">
-          <p className="log-viewer-text">{appLocalizer.tab_name} - log viewer</p>
+          <p className="log-viewer-text">{appLocalizer?.tab_name} - log viewer</p>
           <div className="click-to-copy">
             <button className="copy-btn" onClick={handleCopyToClipboard}>
               <i className="adminLib-vendor-form-copy"></i>

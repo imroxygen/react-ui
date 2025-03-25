@@ -1,25 +1,33 @@
-import React,{ useState, useEffect } from "react";
-import { BasicInput } from "../../Input/BasicInput";
-import { SelectInput } from "../../Input/SelectInput";
-import { getApiLink, getApiResponse } from "../../../service/apiService";
-import { useSetting } from "../../../context/SettingContext";
+import React, { useState, useEffect } from "react";
 import "./InputMailchimpList.scss";
+import { useSetting } from "../../../context/SettingContext";
+import { getApiLink, getApiResponse } from "../../../service/apiService";
+import { BasicInput } from "../../Input";
+import SelectInput from "../../Input/SelectInput/SelectInput";
+
+// Define types for API response and component props
+interface SelectOption {
+  value: string;
+  label: string;
+}
 
 interface InputMailchimpListProps {
   mailchimpKey: string;
   optionKey: string;
-  settingChanged: { current: boolean };
+  settingChanged: React.MutableRefObject<boolean>;
   apiLink: string;
   proSettingChanged: () => boolean;
-  onChange: (event: { target: { value: any } }, key: string) => void;
+  onChange: (event: { target: { value: string } }, key: string) => void;
   selectKey: string;
-  value: any;
+  value?: string;
 }
 
 const InputMailchimpList: React.FC<InputMailchimpListProps> = (props) => {
   const { mailchimpKey, optionKey, settingChanged } = props;
+
+  // State variables
   const { setting, updateSetting } = useSetting();
-  const [selectOption, setSelectOption] = useState<any[]>(setting[optionKey] || []);
+  const [selectOption, setSelectOption] = useState<SelectOption[]>(setting[optionKey] || []);
   const [loading, setLoading] = useState<boolean>(false);
   const [showOption, setShowOption] = useState<boolean>(false);
   const [mailchimpErrorMessage, setMailchimpErrorMessage] = useState<string>("");
@@ -30,14 +38,22 @@ const InputMailchimpList: React.FC<InputMailchimpListProps> = (props) => {
     } else {
       setLoading(true);
       setMailchimpErrorMessage("");
-      const options = await getApiResponse(getApiLink(props.apiLink));
-      settingChanged.current = true;
-      updateSetting(optionKey, options);
-      setSelectOption([options]);
-      setLoading(false);
-      setShowOption(true);
+
+      try {
+        const options: SelectOption[] = (await getApiResponse(getApiLink(props.apiLink))) ?? []; // ✅ Ensure it's always an array
+        settingChanged.current = true;
+        updateSetting(optionKey, options);
+        setSelectOption(options);
+        setShowOption(true);
+      } catch (error) {
+        console.error("Error fetching Mailchimp list:", error);
+        setMailchimpErrorMessage("Failed to fetch MailChimp list.");
+      } finally {
+        setLoading(false);
+      }
     }
   };
+
 
   return (
     <div className="connect-main-wrapper">
@@ -76,18 +92,17 @@ const InputMailchimpList: React.FC<InputMailchimpListProps> = (props) => {
         )}
       </div>
 
-      {(selectOption.length || showOption) && (
+      {(selectOption.length > 0 || showOption) && (
         <SelectInput
           onChange={(e) => {
-            // const event = { target: { value: e?.value } };
-            const event = { target: { value: selectOption} };
-            if (!props.proSettingChanged()) {
-              props.onChange(event, props.selectKey);
+            if (!props.proSettingChanged() && e && "value" in e) {
+              props.onChange({ target: { value: e.value } }, props.selectKey);
             }
           }}
           options={selectOption}
           value={props.value}
         />
+
       )}
     </div>
   );

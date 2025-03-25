@@ -1,4 +1,5 @@
 export * from "./PopupContent";
+export * from "./PopupContent/ModulePopup";
 export * from "./CustomTable";
 export * from "./DisplayButton";
 export * from "./InputMailchimpList"

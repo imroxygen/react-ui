@@ -7,11 +7,11 @@ import "./popupContent.scss";
 
 export interface ModulePopupProps {
     name?: string;
-    settings?: boolean;
+    settings?: string;
     plugin?: string;
 }
 
-const ModulePopup: React.FC<ModulePopupProps> = ({ name, settings, plugin }) => {
+export const ModulePopup: React.FC<ModulePopupProps> = ({ name, settings, plugin }) => {
     // Handle cases where appLocalizer is unavailable
     const modulePageUrl =
         typeof window !== "undefined" && (window as any).appLocalizer?.module_page_url
