@@ -11,7 +11,7 @@ export interface ButtonProps {
     descClass?: string;
 }
 
-export const Button: React.FC<ButtonProps> = ({
+ const Button: React.FC<ButtonProps> = ({
     wrapperClass,
     inputClass,
     type = "button",

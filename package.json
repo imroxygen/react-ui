@@ -3,15 +3,11 @@
     "version": "1.0.0",
     "description": "A custom React UI component library",
     "main": "dist/index.js",
-    "module": "dist/index.mjs",
+    "module": "dist/index.esm.js",
     "types": "dist/index.d.ts",
     "files": [
         "dist"
     ],
-    "exports": {
-        "import": "./dist/index.esm.js",
-        "require": "./dist/index.cjs.js"
-      },
     "scripts": {
         "build": "tsup",
         "build:types": "tsc --emitDeclarationOnly --outDir dist/types",
